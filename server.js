@@ -1,7 +1,8 @@
 const express = require("express"),
     http = require("http");
 
-const router = require("./router");
+const router = require("./router"),
+    dbcontext = require("./database/dbcontext");
 
 class Server {
     constructor() {
