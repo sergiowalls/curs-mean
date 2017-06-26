@@ -9,11 +9,11 @@ class Router {
 
     addRoutes() {
         this.router.get(
-            "/api/quotes/1",
+            "/quotes/1",
             (req, res) => res.json({message: "Hello world"})
         );
 
-        this.router.route("/api/quotes")
+        this.router.route("/quotes")
             .get((req, res) => res.json([{message: "Foo"}, {message: "Bar"}]))
             .post((req, res) => res.json({message: "Post"}))
             .put((req, res) => res.json({message: "Put"}))
