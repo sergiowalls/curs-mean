@@ -1,5 +1,6 @@
 const express = require("express"),
-    http = require("http");
+    http = require("http"),
+    bodyParser = require("body-parser");
 
 const router = require("./router"),
     dbcontext = require("./database/dbcontext");
@@ -11,6 +12,7 @@ class Server {
 
     init() {
         this.app = express();
+        this.app.use(bodyParser.json());
         this.app.use(express.static("./public"));
         this.app.use("/api", router);
         this.app.use((req, res, next) => res.status(404).json({message: "Resource not found"}))

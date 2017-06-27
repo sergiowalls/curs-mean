@@ -11,13 +11,13 @@ class Router {
 
     addRoutes() {
         this.router.route("/quotes/:id")
-            .get(quotesController.get);
+            .get(quotesController.get)
+            .put(quotesController.update)
+            .delete(quotesController.remove);
 
         this.router.route("/quotes")
             .get(quotesController.getAll)
-            .post((req, res) => res.json({message: "Post"}))
-            .put((req, res) => res.json({message: "Put"}))
-            .delete((req, res) => res.json({message: "Delete"}));
+            .post(quotesController.create);
     }
 }
 
