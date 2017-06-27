@@ -3,7 +3,9 @@ const orm = require("orm");
 const quote = require("../models/quote"),
     quotes = require("../models/quoteSeed"),
     user = require("../models/user"),
-    users = require("../models/userSeed");
+    users = require("../models/userSeed"),
+    category = require("../models/category"),
+    categories = require("../models/categorySeed");
 
 class DBcontext {
 
@@ -19,6 +21,7 @@ class DBcontext {
 
             quote.define(this.db);
             user.define(this.db);
+            category.define(this.db);
 
             this.db.drop(err =>{
                 this.db.sync(err =>{
@@ -31,6 +34,10 @@ class DBcontext {
                     this.db.models.user.create(users, function (err) {
                         if (err) console.log(err);
                         else console.log("User seed completed successfully");
+                    });
+                    this.db.models.category.create(categories, function (err) {
+                        if (err) console.log(err);
+                        else console.log("Category seed completed successfully");
                     });
                 })
             });
