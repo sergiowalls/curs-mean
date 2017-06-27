@@ -10,10 +10,8 @@ class Router {
     }
 
     addRoutes() {
-        this.router.get(
-            "/quotes/1",
-            (req, res) => res.json({message: "Hello world"})
-        );
+        this.router.route("/quotes/:id")
+            .get(quotesController.get);
 
         this.router.route("/quotes")
             .get(quotesController.getAll)
