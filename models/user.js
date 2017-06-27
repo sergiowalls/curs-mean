@@ -1,25 +1,25 @@
-class Quote {
+class User {
 
     define(db) {
-        db.define("quote", {
-            text: {
+        db.define("user", {
+            username: {
                 type: "text",
                 required: true
             },
-            character: {
+            name: {
                 type: "text",
                 required: true
             },
-            movie: {
+            email: {
                 type: "text",
                 required: true
             },
-            year: {
+            age: {
                 type: "integer",
-                required: true
+                required: false
             }
         });
     }
 }
 
-module.exports = new Quote();
+module.exports = new User();
