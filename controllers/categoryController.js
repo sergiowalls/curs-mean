@@ -5,37 +5,31 @@ class CategoryController {
     }
 
     getAll(req, res, next) {
-        dbcontext.db.models.category.find({}, function (err, categories) {
+        dbcontext.db.models.category.find({}, (err, categories) => {
             if (err) res.status(500).json(err);
             else res.json(categories)
         })
     }
 
     get(req, res, next) {
-        dbcontext.db.models.category.get(req.params.id, function (err, category) {
+        dbcontext.db.models.category.get(req.params.id, (err, category) => {
             if (err) res.status(500).json(err);
             else res.json(category)
         })
     }
 
     create(req, res, next) {
-        dbcontext.db.models.category.create(req.body,
-            function (err, category) {
-                if (err) res.status(500).json(err);
-                else res.json(category)
-            })
+        dbcontext.db.models.category.create(req.body, (err, category) => {
+            if (err) res.status(500).json(err);
+            else res.json(category)
+        })
     }
 
     update(req, res, next) {
-        dbcontext.db.models.category.get(req.params.id, function (err, category) {
+        dbcontext.db.models.category.get(req.params.id, (err, category) => {
             if (err) res.status(500).json(err);
             else {
-                category.save({
-                    text: req.body.text,
-                    character: req.body.character,
-                    movie: req.body.movie,
-                    year: req.body.year
-                }, function (err) {
+                category.save({name: req.body.name}, err => {
                     if (!err) console.log("Saved!");
                 });
                 res.json(category);
@@ -44,7 +38,7 @@ class CategoryController {
     }
 
     remove(req, res, next) {
-        dbcontext.db.models.category.get(req.params.id, function (err, category) {
+        dbcontext.db.models.category.get(req.params.id, (err, category) => {
             if (err) res.status(500).json(err);
             else {
                 category.remove(err => {

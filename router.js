@@ -2,6 +2,7 @@ const express = require("express");
 
 const quotesController = require("./controllers/quoteController");
 const categoriesController = require("./controllers/categoryController");
+const moviesController = require("./controllers/movieController");
 
 class Router {
 
@@ -28,6 +29,15 @@ class Router {
         this.router.route("/categories")
             .get(categoriesController.getAll)
             .post(categoriesController.create);
+
+        this.router.route("/movies/:id")
+            .get(moviesController.get)
+            .put(moviesController.update)
+            .delete(moviesController.remove);
+
+        this.router.route("/movies")
+            .get(moviesController.getAll)
+            .post(moviesController.create);
     }
 }
 
