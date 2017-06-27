@@ -18,16 +18,22 @@ class DBcontext {
 
             quote.define(db);
             user.define(db);
-            db.sync(err =>{
-                if (err) console.log(err);
-                else console.log("Models added successfully");
-                db.models.quote.create(quotes, function (err) {
+
+            db.drop(err =>{
+                db.sync(err =>{
                     if (err) console.log(err);
-                });
-                db.models.user.create(users, function (err) {
-                    if (err) console.log(err);
-                });
-            })
+                    else console.log("Models added successfully");
+                    db.models.quote.create(quotes, function (err) {
+                        if (err) console.log(err);
+                        else console.log("Quote seed completed successfully");
+                    });
+                    db.models.user.create(users, function (err) {
+                        if (err) console.log(err);
+                        else console.log("User seed completed successfully");
+                    });
+                })
+            });
+
         })
     }
 }

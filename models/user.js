@@ -4,7 +4,8 @@ class User {
         db.define("user", {
             username: {
                 type: "text",
-                required: true
+                required: true,
+                unique: true
             },
             name: {
                 type: "text",
