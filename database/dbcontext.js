@@ -12,22 +12,23 @@ class DBcontext {
     }
 
     init() {
-        orm.connect(process.env.DB_CONNECTION_STRING, function (err, db) {
+        orm.connect(process.env.DB_CONNECTION_STRING, (err, db) => {
             if (err) console.log(`Error connecting to the database \n ${err}`);
             else console.log("Connected successfully");
+            this.db = db;
 
-            quote.define(db);
-            user.define(db);
+            quote.define(this.db);
+            user.define(this.db);
 
-            db.drop(err =>{
-                db.sync(err =>{
+            this.db.drop(err =>{
+                this.db.sync(err =>{
                     if (err) console.log(err);
                     else console.log("Models added successfully");
-                    db.models.quote.create(quotes, function (err) {
+                    this.db.models.quote.create(quotes, function (err) {
                         if (err) console.log(err);
                         else console.log("Quote seed completed successfully");
                     });
-                    db.models.user.create(users, function (err) {
+                    this.db.models.user.create(users, function (err) {
                         if (err) console.log(err);
                         else console.log("User seed completed successfully");
                     });

@@ -1,5 +1,7 @@
 const express = require("express");
 
+const quotesController = require("./controllers/quoteController");
+
 class Router {
 
     constructor() {
@@ -14,7 +16,7 @@ class Router {
         );
 
         this.router.route("/quotes")
-            .get((req, res) => res.json([{message: "Foo"}, {message: "Bar"}]))
+            .get(quotesController.getAll)
             .post((req, res) => res.json({message: "Post"}))
             .put((req, res) => res.json({message: "Put"}))
             .delete((req, res) => res.json({message: "Delete"}));
