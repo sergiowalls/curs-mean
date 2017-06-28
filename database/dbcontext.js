@@ -15,41 +15,42 @@ class DBcontext {
         this.init();
     }
 
-    init() {
-        orm.connect(process.env.DB_CONNECTION_STRING, (err, db) => {
-            if (err) console.log(`Error connecting to the database \n ${err}`);
-            else console.log("Connected successfully");
-            this.db = db;
+    async init() {
 
-            quote.define(this.db);
-            user.define(this.db);
-            category.define(this.db);
-            movie.define(this.db);
+        try {
+            this.db = await this._connect(process.env.DB_CONNECTION_STRING);
+        } catch (err) {
+            return console.log(err);
+        }
 
-            this.db.drop(err => {
-                this.db.sync(err => {
+        quote.define(this.db);
+        user.define(this.db);
+        category.define(this.db);
+        movie.define(this.db);
+
+        this.db.drop(err => {
+            this.db.sync(err => {
+                if (err) console.log(err);
+                else console.log("Models added successfully");
+                this.db.models.quote.create(quotes, function (err) {
                     if (err) console.log(err);
-                    else console.log("Models added successfully");
-                    this.db.models.quote.create(quotes, function (err) {
-                        if (err) console.log(err);
-                        else console.log("Quote seed completed successfully");
-                    });
-                    this.db.models.user.create(users, function (err) {
-                        if (err) console.log(err);
-                        else console.log("User seed completed successfully");
-                    });
-                    this.db.models.category.create(categories, function (err) {
-                        if (err) console.log(err);
-                        else console.log("Category seed completed successfully");
-                    });
-                    this.db.models.movie.create(movies, function (err) {
-                        if (err) console.log(err);
-                        else console.log("Movie seed completed successfully");
-                    });
-                })
-            });
+                    else console.log("Quote seed completed successfully");
+                });
+                this.db.models.user.create(users, function (err) {
+                    if (err) console.log(err);
+                    else console.log("User seed completed successfully");
+                });
+                this.db.models.category.create(categories, function (err) {
+                    if (err) console.log(err);
+                    else console.log("Category seed completed successfully");
+                });
+                this.db.models.movie.create(movies, function (err) {
+                    if (err) console.log(err);
+                    else console.log("Movie seed completed successfully");
+                });
+            })
+        });
 
-        })
     }
 
     get(model, id) {
@@ -74,7 +75,7 @@ class DBcontext {
         return new Promise((resolve, reject) => {
             this.db.models[model].create(data, (error, data) => {
                 if (error) reject(error);
-                else resolve (data)
+                else resolve(data)
             });
         })
     }
@@ -83,10 +84,22 @@ class DBcontext {
         return new Promise((resolve, reject) => {
             this.get(model, id)
                 .then(data => data.remove(err => {
-                    if (!err) console.log("Removed!");
-                    resolve(data);
+                    if (err) reject(err);
+                    else {
+                        console.log("Removed!");
+                        resolve(data);
+                    }
                 }))
                 .catch(err => reject(err))
+        })
+    }
+
+    _connect(connectionString) {
+        return new Promise((resolve, reject) => {
+            orm.connect(connectionString, (error, db) => {
+                if (error) reject(error);
+                else resolve(db);
+            })
         })
     }
 }

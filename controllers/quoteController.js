@@ -18,10 +18,14 @@ class QuoteController {
             .catch(err => res.status(404).json(err))
     }
 
-    create(req, res) {
-        dbcontext.create(QUOTE_DB_MODEL, req.body)
-            .then(data => res.json(data))
-            .catch(err => res.status(500).json(err))
+    async create(req, res) {
+        try {
+            let data = await dbcontext.create(QUOTE_DB_MODEL, req.body);
+            res.json(data)
+        }
+        catch (e) {
+            res.status(500).json(e)
+        }
     }
 
     update(req, res) {
