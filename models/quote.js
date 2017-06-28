@@ -20,6 +20,10 @@ class Quote {
             }
         });
     }
+
+    createRelationships(db) {
+        db.models.quote.hasOne('category', db.models.category);
+    }
 }
 
 module.exports = new Quote();

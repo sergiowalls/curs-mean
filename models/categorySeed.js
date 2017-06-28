@@ -10,7 +10,7 @@ const categories =
             name: "Comedy"
         },
         {
-            name: "Fantasy"
+            name: "Thriller"
         },
     ];
 

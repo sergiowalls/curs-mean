@@ -16,41 +16,29 @@ class DBcontext {
     }
 
     async init() {
-
         try {
             this.db = await this._connect(process.env.DB_CONNECTION_STRING);
+
+            user.define(this.db);
+            category.define(this.db);
+            movie.define(this.db);
+            quote.define(this.db);
+
+            quote.createRelationships(this.db);
+
+            await this._drop();
+
+            await this._sync();
+            console.log("Models added successfully");
+
+            await Promise.all([
+                this.create('quote', quotes),
+                this.create('category', categories),
+                this.create('movie', movies)]);
+            console.log("Models seeded successfully");
         } catch (err) {
             return console.log(err);
         }
-
-        quote.define(this.db);
-        user.define(this.db);
-        category.define(this.db);
-        movie.define(this.db);
-
-        await this._drop();
-
-        this.db.sync(err => {
-            if (err) console.log(err);
-            else console.log("Models added successfully");
-            this.db.models.quote.create(quotes, err => {
-                if (err) console.log(err);
-                else console.log("Quote seed completed successfully");
-            });
-            this.db.models.user.create(users, err => {
-                if (err) console.log(err);
-                else console.log("User seed completed successfully");
-            });
-            this.db.models.category.create(categories, err => {
-                if (err) console.log(err);
-                else console.log("Category seed completed successfully");
-            });
-            this.db.models.movie.create(movies, err => {
-                if (err) console.log(err);
-                else console.log("Movie seed completed successfully");
-            });
-        })
-
     }
 
     get(model, id) {
@@ -74,7 +62,10 @@ class DBcontext {
     create(model, data) {
         return new Promise((resolve, reject) => {
             this.db.models[model].create(data, (error, data) => {
-                if (error) reject(error);
+                if (error) {
+                    console.log("Created!");
+                    reject(error);
+                }
                 else resolve(data)
             });
         })
@@ -120,6 +111,15 @@ class DBcontext {
     _drop() {
         return new Promise((resolve, reject) => {
             this.db.drop(error => {
+                if (error) reject(error);
+                else resolve()
+            })
+        })
+    }
+
+    _sync() {
+        return new Promise((resolve, reject) => {
+            this.db.sync(error => {
                 if (error) reject(error);
                 else resolve()
             })

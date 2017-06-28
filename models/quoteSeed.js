@@ -4,7 +4,10 @@ const quotes =
             text: "I am gonna ask you questions. And every time you don't give me answers, I'm gonna cut something off. And I promise you, they will be things you will miss.",
             character: "The Bride",
             movie: "Kill Bill: Volume 1",
-            year: "2003"
+            year: "2003",
+            category: {
+                name: "Fantasy"
+            }
         },
         {
             text: "Choice.  The problem is choice.",
