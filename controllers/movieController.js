@@ -40,15 +40,9 @@ class MovieController {
     }
 
     remove(req, res, next) {
-        dbcontext.db.models.movie.get(req.params.id, (err, movie) => {
-            if (err) res.status(500).json(err);
-            else {
-                movie.remove(err => {
-                    if (!err) console.log("Removed!");
-                });
-                res.json(movie);
-            }
-        })
+        dbcontext.remove('movie', req.params.id)
+            .then(data => res.json(data))
+            .catch(err => res.status(404).json(err))
     }
 }
 

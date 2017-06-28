@@ -77,8 +77,17 @@ class DBcontext {
                 else resolve (data)
             });
         })
+    }
 
-
+    remove(model, id) {
+        return new Promise((resolve, reject) => {
+            this.get(model, id)
+                .then(data => data.remove(err => {
+                    if (!err) console.log("Removed!");
+                    resolve(data);
+                }))
+                .catch(err => reject(err))
+        })
     }
 }
 
