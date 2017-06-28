@@ -6,25 +6,25 @@ class QuoteController {
     constructor() {
     }
 
-    getAll(req, res, next) {
+    getAll(req, res) {
         dbcontext.find(QUOTE_DB_MODEL, {})
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
 
-    get(req, res, next) {
+    get(req, res) {
         dbcontext.get(QUOTE_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
     }
 
-    create(req, res, next) {
+    create(req, res) {
         dbcontext.create(QUOTE_DB_MODEL, req.body)
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
 
-    update(req, res, next) {
+    update(req, res) {
         dbcontext.db.models.quote.get(req.params.id, (err, quote) => {
             if (err) res.status(500).json(err);
             else {
@@ -41,7 +41,7 @@ class QuoteController {
         })
     }
 
-    remove(req, res, next) {
+    remove(req, res) {
         dbcontext.remove(QUOTE_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
