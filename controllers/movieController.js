@@ -17,10 +17,9 @@ class MovieController {
     }
 
     create(req, res, next) {
-        dbcontext.create('movie', req.body, (err, movie) => {
-            if (err) res.status(500).json(err);
-            else res.json(movie)
-        })
+        dbcontext.create('movie', req.body)
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err))
     }
 
     update(req, res, next) {

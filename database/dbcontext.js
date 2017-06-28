@@ -70,8 +70,15 @@ class DBcontext {
         })
     }
 
-    create(model, data, cb) {
-        this.db.models[model].create(data, cb);
+    create(model, data) {
+        return new Promise((resolve, reject) => {
+            this.db.models[model].create(data, (error, data) => {
+                if (error) reject(error);
+                else resolve (data)
+            });
+        })
+
+
     }
 }
 

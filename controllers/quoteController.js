@@ -17,10 +17,9 @@ class QuoteController {
     }
 
     create(req, res, next) {
-        dbcontext.create('quote', req.body, (err, quote) => {
-            if (err) res.status(500).json(err);
-            else res.json(quote)
-        })
+        dbcontext.create('quote', req.body)
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err))
     }
 
     update(req, res, next) {

@@ -17,10 +17,9 @@ class CategoryController {
     }
 
     create(req, res, next) {
-        dbcontext.create('category', req.body, (err, category) => {
-            if (err) res.status(500).json(err);
-            else res.json(category)
-        })
+        dbcontext.create('category', req.body)
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err))
     }
 
     update(req, res, next) {
