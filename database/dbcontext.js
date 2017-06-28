@@ -51,6 +51,10 @@ class DBcontext {
 
         })
     }
+
+    get(model, id, cb) {
+        this.db.models[model].get(id, cb);
+    }
 }
 
 module.exports = new DBcontext();

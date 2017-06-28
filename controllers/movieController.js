@@ -12,7 +12,7 @@ class MovieController {
     }
 
     get(req, res, next) {
-        dbcontext.db.models.movie.get(req.params.id, (err, movie) => {
+        dbcontext.get('movie', req.params.id, (err, movie) => {
             if (err) res.status(500).json(err);
             else res.json(movie)
         })

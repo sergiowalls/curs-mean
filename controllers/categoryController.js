@@ -12,7 +12,7 @@ class CategoryController {
     }
 
     get(req, res, next) {
-        dbcontext.db.models.category.get(req.params.id, (err, category) => {
+        dbcontext.get('category', req.params.id, (err, category) => {
             if (err) res.status(500).json(err);
             else res.json(category)
         })

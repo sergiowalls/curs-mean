@@ -12,7 +12,7 @@ class QuoteController {
     }
 
     get(req, res, next) {
-        dbcontext.db.models.quote.get(req.params.id, (err, quote) => {
+        dbcontext.get('quote', req.params.id, (err, quote) => {
             if (err) res.status(500).json(err);
             else res.json(quote)
         })
