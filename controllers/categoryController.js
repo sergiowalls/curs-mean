@@ -11,7 +11,7 @@ class CategoryController {
             let data = await dbcontext.find(CATEGORY_DB_MODEL, {});
             res.json(data)
         } catch (e) {
-            res.status(500).json(err)
+            res.status(500).json(e)
         }
     }
 
@@ -29,7 +29,7 @@ class CategoryController {
             let data = await dbcontext.create(CATEGORY_DB_MODEL, req.body);
             res.json(data)
         } catch (e) {
-            res.status(500).json(err)
+            res.status(500).json(e)
         }
     }
 
@@ -50,7 +50,7 @@ class CategoryController {
             let data = await dbcontext.remove(CATEGORY_DB_MODEL, req.params.id);
             res.json(data)
         } catch (e) {
-            res.status(404).json(err)
+            res.status(404).json(e)
         }
     }
 }
