@@ -6,22 +6,31 @@ class CategoryController {
     constructor() {
     }
 
-    getAll(req, res) {
-        dbcontext.find(CATEGORY_DB_MODEL, {})
-            .then(data => res.json(data))
-            .catch(err => res.status(500).json(err))
+    async getAll(req, res) {
+        try {
+            let data = await dbcontext.find(CATEGORY_DB_MODEL, {});
+            res.json(data)
+        } catch (e) {
+            res.status(500).json(err)
+        }
     }
 
-    get(req, res) {
-        dbcontext.get(CATEGORY_DB_MODEL, req.params.id)
-            .then(data => res.json(data))
-            .catch(err => res.status(404).json(err))
+    async get(req, res) {
+        try {
+            let data = await dbcontext.get(CATEGORY_DB_MODEL, req.params.id);
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(e)
+        }
     }
 
-    create(req, res) {
-        dbcontext.create(CATEGORY_DB_MODEL, req.body)
-            .then(data => res.json(data))
-            .catch(err => res.status(500).json(err))
+    async create(req, res) {
+        try {
+            let data = await dbcontext.create(CATEGORY_DB_MODEL, req.body);
+            res.json(data)
+        } catch (e) {
+            res.status(500).json(err)
+        }
     }
 
     update(req, res) {
@@ -36,10 +45,13 @@ class CategoryController {
         })
     }
 
-    remove(req, res) {
-        dbcontext.remove(CATEGORY_DB_MODEL, req.params.id)
-            .then(data => res.json(data))
-            .catch(err => res.status(404).json(err))
+    async remove(req, res) {
+        try {
+            let data = await dbcontext.remove(CATEGORY_DB_MODEL, req.params.id);
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(err)
+        }
     }
 }
 

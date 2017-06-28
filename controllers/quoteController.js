@@ -6,24 +6,29 @@ class QuoteController {
     constructor() {
     }
 
-    getAll(req, res) {
-        dbcontext.find(QUOTE_DB_MODEL, {})
-            .then(data => res.json(data))
-            .catch(err => res.status(500).json(err))
+    async getAll(req, res) {
+        try {
+            let data = await dbcontext.find(QUOTE_DB_MODEL, {});
+            res.json(data)
+        } catch (e) {
+            res.status(500).json(err)
+        }
     }
 
-    get(req, res) {
-        dbcontext.get(QUOTE_DB_MODEL, req.params.id)
-            .then(data => res.json(data))
-            .catch(err => res.status(404).json(err))
+    async get(req, res) {
+        try {
+            let data = await dbcontext.get(QUOTE_DB_MODEL, req.params.id);
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(e)
+        }
     }
 
     async create(req, res) {
         try {
             let data = await dbcontext.create(QUOTE_DB_MODEL, req.body);
             res.json(data)
-        }
-        catch (e) {
+        } catch (e) {
             res.status(500).json(e)
         }
     }
@@ -45,10 +50,13 @@ class QuoteController {
         })
     }
 
-    remove(req, res) {
-        dbcontext.remove(QUOTE_DB_MODEL, req.params.id)
-            .then(data => res.json(data))
-            .catch(err => res.status(404).json(err))
+    async remove(req, res) {
+        try {
+            let data = await dbcontext.remove(QUOTE_DB_MODEL, req.params.id);
+            res.json(data);
+        } catch (e) {
+            res.status(404).json(err)
+        }
     }
 }
 
