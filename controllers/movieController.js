@@ -1,23 +1,25 @@
 const dbcontext = require("../database/dbcontext");
 
+const MOVIE_DB_MODEL = 'movie';
+
 class MovieController {
     constructor() {
     }
 
     getAll(req, res, next) {
-        dbcontext.find('movie', {})
+        dbcontext.find(MOVIE_DB_MODEL, {})
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
 
     get(req, res, next) {
-        dbcontext.get('movie', req.params.id)
+        dbcontext.get(MOVIE_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
     }
 
     create(req, res, next) {
-        dbcontext.create('movie', req.body)
+        dbcontext.create(MOVIE_DB_MODEL, req.body)
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
@@ -40,7 +42,7 @@ class MovieController {
     }
 
     remove(req, res, next) {
-        dbcontext.remove('movie', req.params.id)
+        dbcontext.remove(MOVIE_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
     }

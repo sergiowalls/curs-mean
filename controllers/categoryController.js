@@ -1,23 +1,25 @@
 const dbcontext = require("../database/dbcontext");
 
+const CATEGORY_DB_MODEL = 'category';
+
 class CategoryController {
     constructor() {
     }
 
     getAll(req, res, next) {
-        dbcontext.find('category', {})
+        dbcontext.find(CATEGORY_DB_MODEL, {})
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
 
     get(req, res, next) {
-        dbcontext.get('category', req.params.id)
+        dbcontext.get(CATEGORY_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
     }
 
     create(req, res, next) {
-        dbcontext.create('category', req.body)
+        dbcontext.create(CATEGORY_DB_MODEL, req.body)
             .then(data => res.json(data))
             .catch(err => res.status(500).json(err))
     }
@@ -35,7 +37,7 @@ class CategoryController {
     }
 
     remove(req, res, next) {
-        dbcontext.remove('category', req.params.id)
+        dbcontext.remove(CATEGORY_DB_MODEL, req.params.id)
             .then(data => res.json(data))
             .catch(err => res.status(404).json(err))
     }
