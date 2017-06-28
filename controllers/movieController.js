@@ -5,17 +5,15 @@ class MovieController {
     }
 
     getAll(req, res, next) {
-        dbcontext.find('movie', {}, (err, movies) => {
-            if (err) res.status(500).json(err);
-            else res.json(movies)
-        })
+        dbcontext.find('movie', {})
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err))
     }
 
     get(req, res, next) {
-        dbcontext.get('movie', req.params.id, (err, movie) => {
-            if (err) res.status(500).json(err);
-            else res.json(movie)
-        })
+        dbcontext.get('movie', req.params.id)
+            .then(data => res.json(data))
+            .catch(err => res.status(404).json(err))
     }
 
     create(req, res, next) {

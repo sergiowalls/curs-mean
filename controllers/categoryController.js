@@ -5,17 +5,15 @@ class CategoryController {
     }
 
     getAll(req, res, next) {
-        dbcontext.find('category', {}, (err, categories) => {
-            if (err) res.status(500).json(err);
-            else res.json(categories)
-        })
+        dbcontext.find('category', {})
+            .then(data => res.json(data))
+            .catch(err => res.status(500).json(err))
     }
 
     get(req, res, next) {
-        dbcontext.get('category', req.params.id, (err, category) => {
-            if (err) res.status(500).json(err);
-            else res.json(category)
-        })
+        dbcontext.get('category', req.params.id)
+            .then(data => res.json(data))
+            .catch(err => res.status(404).json(err))
     }
 
     create(req, res, next) {

@@ -52,12 +52,22 @@ class DBcontext {
         })
     }
 
-    get(model, id, cb) {
-        this.db.models[model].get(id, cb);
+    get(model, id) {
+        return new Promise((resolve, reject) => {
+            this.db.models[model].get(id, (error, data) => {
+                if (error) reject(error);
+                else resolve(data);
+            });
+        });
     }
 
-    find(model, where, cb) {
-        this.db.models[model].find(where, cb);
+    find(model, where) {
+        return new Promise((resolve, reject) => {
+            this.db.models[model].find(where, (error, data) => {
+                if (error) reject(error);
+                else resolve(data);
+            });
+        })
     }
 
     create(model, data, cb) {
