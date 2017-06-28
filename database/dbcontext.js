@@ -80,6 +80,20 @@ class DBcontext {
         })
     }
 
+    update(model, id, values) {
+        return new Promise((resolve, reject) => {
+            this.get(model, id)
+                .then(data => data.save(values, err => {
+                    if (err) reject(err);
+                    else {
+                        console.log("Updated!");
+                        resolve(data);
+                    }
+                }))
+                .catch(err => reject(err))
+        })
+    }
+
     remove(model, id) {
         return new Promise((resolve, reject) => {
             this.get(model, id)

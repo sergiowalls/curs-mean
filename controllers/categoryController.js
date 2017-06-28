@@ -33,16 +33,13 @@ class CategoryController {
         }
     }
 
-    update(req, res) {
-        dbcontext.db.models.category.get(req.params.id, (err, category) => {
-            if (err) res.status(500).json(err);
-            else {
-                category.save({name: req.body.name}, err => {
-                    if (!err) console.log("Saved!");
-                });
-                res.json(category);
-            }
-        })
+    async update(req, res) {
+        try {
+            let data = await dbcontext.update(CATEGORY_DB_MODEL, req.params.id, {name: req.body.name});
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(e)
+        }
     }
 
     async remove(req, res) {

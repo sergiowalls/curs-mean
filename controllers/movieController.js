@@ -34,21 +34,18 @@ class MovieController {
         }
     }
 
-    update(req, res) {
-        dbcontext.db.models.movie.get(req.params.id, (err, movie) => {
-            if (err) res.status(500).json(err);
-            else {
-                movie.save({
-                    title: req.body.title,
-                    year: req.body.year,
-                    genre: req.body.genre,
-                    running_time: req.body.running_time
-                }, function (err) {
-                    if (!err) console.log("Saved!");
-                });
-                res.json(movie);
-            }
-        })
+    async update(req, res) {
+        try {
+            let data = await dbcontext.update(MOVIE_DB_MODEL, req.params.id, {
+                title: req.body.title,
+                year: req.body.year,
+                genre: req.body.genre,
+                running_time: req.body.running_time
+            });
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(e)
+        }
     }
 
     async remove(req, res) {

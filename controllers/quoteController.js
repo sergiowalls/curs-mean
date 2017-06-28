@@ -33,21 +33,18 @@ class QuoteController {
         }
     }
 
-    update(req, res) {
-        dbcontext.db.models.quote.get(req.params.id, (err, quote) => {
-            if (err) res.status(500).json(err);
-            else {
-                quote.save({
-                    text: req.body.text,
-                    character: req.body.character,
-                    movie: req.body.movie,
-                    year: req.body.year
-                }, function (err) {
-                    if (!err) console.log("Saved!");
-                });
-                res.json(quote);
-            }
-        })
+    async update(req, res) {
+        try {
+            let data = await dbcontext.update(QUOTE_DB_MODEL, req.params.id, {
+                text: req.body.text,
+                character: req.body.character,
+                movie: req.body.movie,
+                year: req.body.year
+            });
+            res.json(data)
+        } catch (e) {
+            res.status(404).json(e)
+        }
     }
 
     async remove(req, res) {
