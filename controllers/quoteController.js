@@ -5,7 +5,7 @@ class QuoteController {
     }
 
     getAll(req, res, next) {
-        dbcontext.db.models.quote.find({}, (err, quotes) => {
+        dbcontext.find('quote', {}, (err, quotes) => {
             if (err) res.status(500).json(err);
             else res.json(quotes)
         })
@@ -19,7 +19,7 @@ class QuoteController {
     }
 
     create(req, res, next) {
-        dbcontext.db.models.quote.create(req.body, (err, quote) => {
+        dbcontext.create('quote', req.body, (err, quote) => {
             if (err) res.status(500).json(err);
             else res.json(quote)
         })

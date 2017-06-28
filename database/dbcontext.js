@@ -55,6 +55,14 @@ class DBcontext {
     get(model, id, cb) {
         this.db.models[model].get(id, cb);
     }
+
+    find(model, where, cb) {
+        this.db.models[model].find(where, cb);
+    }
+
+    create(model, data, cb) {
+        this.db.models[model].create(data, cb);
+    }
 }
 
 module.exports = new DBcontext();

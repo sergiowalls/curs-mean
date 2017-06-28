@@ -5,7 +5,7 @@ class CategoryController {
     }
 
     getAll(req, res, next) {
-        dbcontext.db.models.category.find({}, (err, categories) => {
+        dbcontext.find('category', {}, (err, categories) => {
             if (err) res.status(500).json(err);
             else res.json(categories)
         })
@@ -19,7 +19,7 @@ class CategoryController {
     }
 
     create(req, res, next) {
-        dbcontext.db.models.category.create(req.body, (err, category) => {
+        dbcontext.create('category', req.body, (err, category) => {
             if (err) res.status(500).json(err);
             else res.json(category)
         })

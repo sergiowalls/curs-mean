@@ -5,7 +5,7 @@ class MovieController {
     }
 
     getAll(req, res, next) {
-        dbcontext.db.models.movie.find({}, (err, movies) => {
+        dbcontext.find('movie', {}, (err, movies) => {
             if (err) res.status(500).json(err);
             else res.json(movies)
         })
@@ -19,7 +19,7 @@ class MovieController {
     }
 
     create(req, res, next) {
-        dbcontext.db.models.movie.create(req.body, (err, movie) => {
+        dbcontext.create('movie', req.body, (err, movie) => {
             if (err) res.status(500).json(err);
             else res.json(movie)
         })
