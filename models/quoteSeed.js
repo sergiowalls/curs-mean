@@ -5,21 +5,21 @@ const quotes =
             character: "The Bride",
             movie: "Kill Bill: Volume 1",
             year: "2003",
-            category: {
-                name: "Fantasy"
-            }
+            category_id: 4
         },
         {
             text: "Choice.  The problem is choice.",
             character: "Neo",
             movie: "The Matrix Reloaded",
-            year: "2003"
+            year: "2003",
+            category_id: 2
         },
         {
             text: "Such a beautiful place, to be with friends.",
             character: "Dobby the House Elf",
             movie: "Harry Potter and the Deathly Hallows – Part 1",
-            year: "2010"
+            year: "2010",
+            category_id: 3
         }
     ];
 

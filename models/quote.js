@@ -22,7 +22,8 @@ class Quote {
     }
 
     createRelationships(db) {
-        db.models.quote.hasOne('category', db.models.category);
+        let {quote, category} = db.models;
+        quote.hasOne('category', category, {autoFetch: true});
     }
 }
 

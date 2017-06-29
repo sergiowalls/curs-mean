@@ -1,16 +1,20 @@
 const categories =
     [
         {
-            name: "Horror"
+            name: "Horror",
+            id: 1
         },
         {
-            name: "Sci-fi"
+            name: "Sci-fi",
+            id: 2
         },
         {
-            name: "Comedy"
+            name: "Fantasy",
+            id: 3
         },
         {
-            name: "Thriller"
+            name: "Thriller",
+            id: 4
         },
     ];
 

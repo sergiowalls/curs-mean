@@ -31,10 +31,10 @@ class DBcontext {
             await this._sync();
             console.log("Models added successfully");
 
-            await Promise.all([
-                this.create('quote', quotes),
-                this.create('category', categories),
-                this.create('movie', movies)]);
+            await this.create('category', categories),
+                await Promise.all([
+                    this.create('quote', quotes),
+                    this.create('movie', movies)]);
             console.log("Models seeded successfully");
         } catch (err) {
             return console.log(err);

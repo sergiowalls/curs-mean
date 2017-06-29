@@ -4,7 +4,8 @@ class Category {
         db.define("category", {
             name: {
                 type: "text",
-                required: true
+                required: true,
+                unique: true
             }
         });
     }
