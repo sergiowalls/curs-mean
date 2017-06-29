@@ -1,6 +1,9 @@
 const HTTPStatus = require('http-status');
 
+const DEFAULT_CREATED_MESSAGE = {message: "Resource created successfully"};
+
 class HttpResponse {
+
     constructor() {
     }
 
@@ -8,7 +11,7 @@ class HttpResponse {
         res.status(HTTPStatus.OK).json(msg);
     }
 
-    created(res, msg) {
+    created(res, msg = DEFAULT_CREATED_MESSAGE) {
         res.status(HTTPStatus.CREATED).json(msg);
     }
 

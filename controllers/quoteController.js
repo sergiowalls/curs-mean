@@ -36,7 +36,8 @@ class QuoteController {
             let data = await dbcontext.create(QUOTE_DB_MODEL, req.body);
             httpResponse.created(res, data);
         } catch (e) {
-            httpResponse.internalError(res, e);
+            if (e.type === "validation") httpResponse.badRequest(res, e);
+            else httpResponse.internalError(res, e);
         }
     }
 

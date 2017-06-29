@@ -63,10 +63,12 @@ class DBcontext {
         return new Promise((resolve, reject) => {
             this.db.models[model].create(data, (error, data) => {
                 if (error) {
-                    console.log("Created!");
                     reject(error);
                 }
-                else resolve(data)
+                else {
+                    console.log("Created!");
+                    resolve(data)
+                }
             });
         })
     }
