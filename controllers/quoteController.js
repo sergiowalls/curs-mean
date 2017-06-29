@@ -7,9 +7,10 @@ class QuoteController {
     }
 
     async getAll(req, res) {
-        let {categoryId} = req.query;
+        let {categoryId, character} = req.query;
         let where = {};
         if (categoryId) where.category_id = categoryId;
+        if (character) where.character = character;
 
         try {
             let data = await dbcontext.find(QUOTE_DB_MODEL, where);
