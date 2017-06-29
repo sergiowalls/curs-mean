@@ -9,9 +9,9 @@ class MovieController {
     async getAll(req, res) {
         try {
             let data = await dbcontext.find(MOVIE_DB_MODEL, {});
-            res.json(data)
+            res.json(data);
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e);
         }
     }
 
@@ -19,18 +19,18 @@ class MovieController {
         try {
             let data =
                 await dbcontext.get(MOVIE_DB_MODEL, req.params.id);
-            res.json(data)
+            res.json(data);
         } catch (e) {
-            res.status(404).json(e)
+            res.status(404).json(e);
         }
     }
 
     async create(req, res) {
         try {
             let data = await dbcontext.create(MOVIE_DB_MODEL, req.body);
-            res.json(data)
+            res.json(data);
         } catch (e) {
-            res.status(500).json(e)
+            res.status(500).json(e);
         }
     }
 
@@ -42,18 +42,18 @@ class MovieController {
                 genre: req.body.genre,
                 running_time: req.body.running_time
             });
-            res.json(data)
+            res.json(data);
         } catch (e) {
-            res.status(404).json(e)
+            res.status(404).json(e);
         }
     }
 
     async remove(req, res) {
         try {
             let data = await dbcontext.remove(MOVIE_DB_MODEL, req.params.id);
-            res.json(data)
+            res.json(data);
         } catch (e) {
-            res.status(404).json(e)
+            res.status(404).json(e);
         }
     }
 }
