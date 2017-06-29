@@ -1,8 +1,9 @@
 const express = require("express");
 
-const quotesController = require("./controllers/quoteController");
-const categoriesController = require("./controllers/categoryController");
-const moviesController = require("./controllers/movieController");
+const authController = require("./controllers/authController"),
+    quotesController = require("./controllers/quoteController"),
+    categoriesController = require("./controllers/categoryController"),
+    moviesController = require("./controllers/movieController");
 
 class Router {
 
@@ -12,32 +13,34 @@ class Router {
     }
 
     addRoutes() {
+        this.router.post("/login", authController.login);
+
         this.router.route("/quotes/:id")
-            .get(quotesController.get)
-            .put(quotesController.update)
-            .delete(quotesController.remove);
+            .get(authController.authenticate, quotesController.get)
+            .put(authController.authenticate, quotesController.update)
+            .delete(authController.authenticate, quotesController.remove);
 
         this.router.route("/quotes")
-            .get(quotesController.getAll)
-            .post(quotesController.create);
+            .get(authController.authenticate, quotesController.getAll)
+            .post(authController.authenticate, quotesController.create);
 
         this.router.route("/categories/:id")
-            .get(categoriesController.get)
-            .put(categoriesController.update)
-            .delete(categoriesController.remove);
+            .get(authController.authenticate, categoriesController.get)
+            .put(authController.authenticate, categoriesController.update)
+            .delete(authController.authenticate, categoriesController.remove);
 
         this.router.route("/categories")
-            .get(categoriesController.getAll)
-            .post(categoriesController.create);
+            .get(authController.authenticate, categoriesController.getAll)
+            .post(authController.authenticate, categoriesController.create);
 
         this.router.route("/movies/:id")
-            .get(moviesController.get)
-            .put(moviesController.update)
-            .delete(moviesController.remove);
+            .get(authController.authenticate, moviesController.get)
+            .put(authController.authenticate, moviesController.update)
+            .delete(authController.authenticate, moviesController.remove);
 
         this.router.route("/movies")
-            .get(moviesController.getAll)
-            .post(moviesController.create);
+            .get(authController.authenticate, moviesController.getAll)
+            .post(authController.authenticate, moviesController.create);
     }
 }
 

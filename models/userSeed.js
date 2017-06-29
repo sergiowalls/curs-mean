@@ -4,13 +4,13 @@ const users =
             username: "admin",
             name: "Administrator",
             email: "admin@admin.com",
-            age: ""
+            password: "admin"
         },
         {
             username: "sergiowalls",
             name: "Sergio",
             email: "sergio.paredes25@gmail.com",
-            age: "22"
+            password: "1234"
         }
     ];
 
