@@ -1,4 +1,5 @@
-const dbcontext = require("../database/dbcontext");
+const dbcontext = require("../database/dbcontext"),
+    httpResponse = require("../httpResponse");
 
 const MOVIE_DB_MODEL = 'movie';
 
@@ -9,28 +10,28 @@ class MovieController {
     async getAll(req, res) {
         try {
             let data = await dbcontext.find(MOVIE_DB_MODEL, {});
-            res.json(data);
+            if (!data.length) httpResponse.notFound(res, {message: "No quotes found"});
+            else httpResponse.ok(res, data);
         } catch (e) {
-            res.status(500).json(e);
+            httpResponse.internalError(res, e);
         }
     }
 
     async get(req, res) {
         try {
-            let data =
-                await dbcontext.get(MOVIE_DB_MODEL, req.params.id);
-            res.json(data);
+            let data = await dbcontext.get(MOVIE_DB_MODEL, req.params.id);
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e);
+            httpResponse.notFound(res, {message: "Movie not found"});
         }
     }
 
     async create(req, res) {
         try {
             let data = await dbcontext.create(MOVIE_DB_MODEL, req.body);
-            res.json(data);
+            httpResponse.created(res, data);
         } catch (e) {
-            res.status(500).json(e);
+            httpResponse.internalError(res, e);
         }
     }
 
@@ -42,18 +43,19 @@ class MovieController {
                 genre: req.body.genre,
                 running_time: req.body.running_time
             });
-            res.json(data);
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e);
+            if (e.type === "validation") httpResponse.badRequest(res, e);
+            httpResponse.notFound(res, {message: "Movie not found"});
         }
     }
 
     async remove(req, res) {
         try {
             let data = await dbcontext.remove(MOVIE_DB_MODEL, req.params.id);
-            res.json(data);
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e);
+            httpResponse.notFound(res, {message: "Movie not found"});
         }
     }
 }

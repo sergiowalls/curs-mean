@@ -51,6 +51,7 @@ class QuoteController {
             });
             httpResponse.ok(res, data);
         } catch (e) {
+            if (e.type === "validation") httpResponse.badRequest(res, e);
             httpResponse.notFound(res, {message: "Quote not found"});
         }
     }

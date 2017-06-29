@@ -1,4 +1,5 @@
-const dbcontext = require("../database/dbcontext");
+const dbcontext = require("../database/dbcontext"),
+    httpResponse = require("../httpResponse");
 
 const CATEGORY_DB_MODEL = 'category';
 
@@ -9,45 +10,47 @@ class CategoryController {
     async getAll(req, res) {
         try {
             let data = await dbcontext.find(CATEGORY_DB_MODEL, {});
-            res.json(data)
+            if (!data.length) httpResponse.notFound(res, {message: "No quotes found"});
+            else httpResponse.ok(res, data);
         } catch (e) {
-            res.status(500).json(e)
+            httpResponse.internalError(res, e);
         }
     }
 
     async get(req, res) {
         try {
             let data = await dbcontext.get(CATEGORY_DB_MODEL, req.params.id);
-            res.json(data)
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e)
+            httpResponse.notFound(res, {message: "Category not found"});
         }
     }
 
     async create(req, res) {
         try {
             let data = await dbcontext.create(CATEGORY_DB_MODEL, req.body);
-            res.json(data)
+            httpResponse.created(res, data);
         } catch (e) {
-            res.status(500).json(e)
+            httpResponse.internalError(res, e);
         }
     }
 
     async update(req, res) {
         try {
             let data = await dbcontext.update(CATEGORY_DB_MODEL, req.params.id, {name: req.body.name});
-            res.json(data)
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e)
+            if (e.type === "validation") httpResponse.badRequest(res, e);
+            httpResponse.notFound(res, {message: "Category not found"});
         }
     }
 
     async remove(req, res) {
         try {
             let data = await dbcontext.remove(CATEGORY_DB_MODEL, req.params.id);
-            res.json(data)
+            httpResponse.ok(res, data);
         } catch (e) {
-            res.status(404).json(e)
+            httpResponse.notFound(res, {message: "Category not found"});
         }
     }
 }
