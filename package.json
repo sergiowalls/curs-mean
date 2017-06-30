@@ -5,7 +5,8 @@
   "main": "prova.js",
   "scripts": {
     "start": "node api/init.js",
-    "build": "node_modules/.bin/webpack --config ./web/webpack.config.js"
+    "build": "node_modules/.bin/webpack --config ./web/webpack.config.js",
+    "build-dev": "node_modules/.bin/webpack-dev-server --config ./web/webpack.config.js"
   },
   "author": "",
   "license": "ISC",

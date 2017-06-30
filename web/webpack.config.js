@@ -49,7 +49,7 @@ module.exports = function (env) {
                         {
                             loader: 'awesome-typescript-loader',
                             options: {
-                                configFileName: './tsconfig.json'
+                                configFileName: path.resolve(__dirname, "./tsconfig.json")
                             },
                         },
                         'angular2-template-loader',
