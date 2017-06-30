@@ -13,7 +13,7 @@ class Server {
     init() {
         this.app = express();
         this.app.use(bodyParser.json());
-        this.app.use(express.static("./public"));
+        this.app.use(express.static("./api/public"));
         this.app.use("/api", router);
         this.app.use((req, res, next) => res.status(404).json({message: "Resource not found"}))
     }
