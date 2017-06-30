@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <title>Movie quotes</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 <body>
 <nav>
     <div class="nav-wrapper teal">
         <label class="brand-logo center">Movie quotes</label>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a onclick="showQuote()">Show me another quote</a></li>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a onclick="showQuote()"><i class="material-icons left">refresh</i>Show me another quote</a></li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+            <li><a onclick="showQuote()"><i class="material-icons left">refresh</i>Show me another quote</a></li>
         </ul>
     </div>
 </nav>
+
 <div class="row">
     <div class="col s6 offset-s3">
         <div class="card grey darken-1">
@@ -33,6 +40,7 @@
 
 <script language="JavaScript">
     $(document).ready(function () {
+        $(".button-collapse").sideNav();
         showQuote();
     });
     function showQuote() {
