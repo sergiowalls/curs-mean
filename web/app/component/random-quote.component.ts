@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Quote} from "../models/quote.model";
+import {Quote} from "../model/quote.model";
 import {QuotesApiService} from "../service/quotes-api.service";
 
 @Component({
