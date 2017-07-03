@@ -30,7 +30,7 @@ class Router {
             .delete(authController.authenticate, categoriesController.remove);
 
         this.router.route("/categories")
-            .get(authController.authenticate, categoriesController.getAll)
+            .get(categoriesController.getAll)
             .post(authController.authenticate, categoriesController.create);
 
         this.router.route("/movies/:id")

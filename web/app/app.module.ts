@@ -4,6 +4,8 @@ import {BrowserModule} from "@angular/platform-browser";
 import {AppComponent} from "./app.component";
 import {RandomQuoteComponent} from "./component/random-quote.component";
 import {QuotesApiService} from "./service/quotes-api.service";
+import {CategoriesApiService} from "./service/categories-api.service";
+import {CategoriesComponent} from "./component/categories.component";
 
 @NgModule({
     imports: [
@@ -12,10 +14,12 @@ import {QuotesApiService} from "./service/quotes-api.service";
     ],
     declarations: [
         AppComponent,
-        RandomQuoteComponent
+        RandomQuoteComponent,
+        CategoriesComponent
     ],
     providers: [
-        QuotesApiService
+        QuotesApiService,
+        CategoriesApiService
     ],
     bootstrap: [AppComponent]
 })
