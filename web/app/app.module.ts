@@ -6,6 +6,7 @@ import {RandomQuoteComponent} from "./component/random-quote.component";
 import {QuotesApiService} from "./service/quotes-api.service";
 import {CategoriesApiService} from "./service/categories-api.service";
 import {CategoriesComponent} from "./component/categories.component";
+import {HttpService} from "./service/http.service";
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import {CategoriesComponent} from "./component/categories.component";
     ],
     providers: [
         QuotesApiService,
-        CategoriesApiService
+        CategoriesApiService,
+        HttpService
     ],
     bootstrap: [AppComponent]
 })

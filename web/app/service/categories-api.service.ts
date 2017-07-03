@@ -1,19 +1,12 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {HttpService} from "./http.service";
 
 @Injectable()
 export class CategoriesApiService {
-    constructor(private _http: Http) {
+    constructor(private _httpService: HttpService) {
     }
 
     getCategories(): Promise<any> {
-        return this._http.get("/api/categories")
-            .toPromise()
-            .then(response => {
-                return response.json()
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        return this._httpService.get("categories");
     }
 }

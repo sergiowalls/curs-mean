@@ -1,19 +1,13 @@
 import {Injectable} from "@angular/core";
+import {HttpService} from "./http.service";
 import {Http} from "@angular/http";
 
 @Injectable()
 export class QuotesApiService {
-    constructor(private _http: Http) {
+    constructor(private _httpService: HttpService) {
     }
 
     getQuotes(): Promise<any> {
-        return this._http.get("/api/quotes")
-            .toPromise()
-            .then(response => {
-                return response.json()
-            })
-            .catch(error => {
-                console.error(error)
-            })
+        return this._httpService.get("quotes");
     }
 }
