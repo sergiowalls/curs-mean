@@ -53,7 +53,7 @@
     "nodemon": "^1.11.0",
     "style-loader": "^0.13.1",
     "tslint": "5.4.3",
-    "typescript": "^2.3.4",
+    "typescript": "2.3.4",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.4.5"
   },
