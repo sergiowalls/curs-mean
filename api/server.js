@@ -15,7 +15,7 @@ class Server {
         this.app.use(bodyParser.json());
         this.app.use(express.static("./api/public"));
         this.app.use("/api", router);
-        this.app.use((req, res, next) => res.status(404).json({message: "Resource not found"}))
+        this.app.use((req, res, next) => res.sendFile(__dirname + "/public/index.html"))
     }
 
     start(port = 3000) {

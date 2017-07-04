@@ -5,11 +5,13 @@ import {MoviesApiService} from "../service/movies-api.service";
 @Component({
     selector: "movies",
     template: `
-        <ul *ngIf="movies">
-            <li *ngFor="let movie of movies" routerLink="/movies/{{movie.id}}">
-                {{ movie.title }}
-            </li>
-        </ul> `
+        <div class="movie-list-component">
+            <ul *ngIf="movies">
+                <li *ngFor="let movie of movies" routerLink="/movies/{{movie.id}}">
+                    {{ movie.title }}
+                </li>
+            </ul>
+        </div>`
 })
 
 export class MovieListComponent implements OnInit {
