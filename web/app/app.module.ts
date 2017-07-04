@@ -10,6 +10,9 @@ import {HttpService} from "./service/http.service";
 import {RouterModule} from "@angular/router";
 import {appRoutes} from "./routes";
 import {CategoryDetailComponent} from "./component/category-detail.component";
+import {MoviesApiService} from "./service/movies-api.service";
+import {MovieListComponent} from "./component/movie-list.component";
+import {MovieDetailComponent} from "./component/movie-detail.component";
 
 @NgModule({
     imports: [
@@ -21,11 +24,14 @@ import {CategoryDetailComponent} from "./component/category-detail.component";
         AppComponent,
         RandomQuoteComponent,
         CategoryListComponent,
-        CategoryDetailComponent
+        CategoryDetailComponent,
+        MovieListComponent,
+        MovieDetailComponent
     ],
     providers: [
         QuotesApiService,
         CategoriesApiService,
+        MoviesApiService,
         HttpService
     ],
     bootstrap: [AppComponent]

@@ -34,12 +34,12 @@ class Router {
             .post(authController.authenticate, categoriesController.create);
 
         this.router.route("/movies/:id")
-            .get(authController.authenticate, moviesController.get)
+            .get(moviesController.get)
             .put(authController.authenticate, moviesController.update)
             .delete(authController.authenticate, moviesController.remove);
 
         this.router.route("/movies")
-            .get(authController.authenticate, moviesController.getAll)
+            .get(moviesController.getAll)
             .post(authController.authenticate, moviesController.create);
     }
 }

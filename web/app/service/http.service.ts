@@ -12,6 +12,5 @@ export class HttpService {
             .then(response => {
                 return response.json()
             })
-            .catch(error => console.error(error))
     }
 }

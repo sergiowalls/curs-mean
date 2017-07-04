@@ -6,8 +6,9 @@ import {Category} from "../model/category.model";
     selector: "categories",
     template: `
         <ul *ngIf="categories">
-            <li *ngFor="let category of categories" (click)="printCategoryName(category)"><a
-                    routerLink="/category/{{category.id}}">{{ category.name }}</a></li>
+            <li *ngFor="let category of categories" (click)="printCategoryName(category)">
+                <a routerLink="/categories/{{category.id}}">{{ category.name }}</a>
+            </li>
         </ul>`
 })
 
