@@ -6,8 +6,8 @@ import {MoviesApiService} from "../service/movies-api.service";
     selector: "movies",
     template: `
         <ul *ngIf="movies">
-            <li *ngFor="let movie of movies">
-                <a routerLink="/movies/{{movie.id}}">{{ movie.title }}</a>
+            <li *ngFor="let movie of movies" routerLink="/movies/{{movie.id}}">
+                {{ movie.title }}
             </li>
         </ul> `
 })
