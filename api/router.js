@@ -22,7 +22,7 @@ class Router {
 
         this.router.route("/quotes")
             .get(quotesController.getAll)
-            .post(authController.authenticate, quotesController.create);
+            .post(quotesController.create);
 
         this.router.route("/categories/:id")
             .get(categoriesController.get)

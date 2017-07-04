@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "./http.service";
-import {Http} from "@angular/http";
+import {Quote} from "../model/quote.model";
 
 @Injectable()
 export class QuotesApiService {
@@ -9,5 +9,9 @@ export class QuotesApiService {
 
     getQuotes(): Promise<any> {
         return this._httpService.get("quotes");
+    }
+
+    postQuote(quote: Quote): Promise<any> {
+        return this._httpService.post("quotes", quote)
     }
 }

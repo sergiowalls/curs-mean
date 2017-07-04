@@ -13,4 +13,12 @@ export class HttpService {
                 return response.json()
             })
     }
+
+    post(url: String, data: any): Promise<any> {
+        return this._http.post("/api/" + url, data)
+            .toPromise()
+            .then(response => {
+                return response.json()
+            })
+    }
 }

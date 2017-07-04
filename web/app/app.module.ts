@@ -14,12 +14,14 @@ import {MoviesApiService} from "./service/movies-api.service";
 import {MovieListComponent} from "./component/movie-list.component";
 import {MovieDetailComponent} from "./component/movie-detail.component";
 import {AddQuoteComponent} from "./component/add-quote.component";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         RouterModule.forRoot(appRoutes),
         BrowserModule,
-        HttpModule
+        HttpModule,
+        FormsModule
     ],
     declarations: [
         AppComponent,

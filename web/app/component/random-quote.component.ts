@@ -5,12 +5,15 @@ import {QuotesApiService} from "../service/quotes-api.service";
 @Component({
     selector: "random-quote",
     template: `
-        <blockquote *ngIf="randomQuote">
-            <p>{{ randomQuote.text }}</p>
-        </blockquote>
+        <div *ngIf="randomQuote">
+            <blockquote>
+                <p>{{ randomQuote.text }}</p>
+            </blockquote>
+            <p>{{randomQuote.character}} | {{randomQuote.movie}}</p>
+        </div>
         <button (click)="onShowRandomQuote()">More</button>
-        <button (click)="addNewQuote()">{{addQuote?'Cancel':'Add quote'}}</button>
-        <add-quote *ngIf="addQuote"></add-quote>
+        <button (click)="addNewQuote()">{{addQuote ? 'Cancel' : 'Add quote'}}</button>
+        <add-quote></add-quote>
     `
 })
 
