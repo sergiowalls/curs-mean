@@ -6,7 +6,7 @@ export class HttpService {
     constructor(private _http: Http) {
     }
 
-    get(url): Promise<any> {
+    get(url: String): Promise<any> {
         return this._http.get("/api/" + url)
             .toPromise()
             .then(response => {

@@ -9,4 +9,8 @@ export class CategoriesApiService {
     getCategories(): Promise<any> {
         return this._httpService.get("categories");
     }
+
+    getCategoryById(id: number): Promise<any> {
+        return this._httpService.get("categories/" + id);
+    }
 }

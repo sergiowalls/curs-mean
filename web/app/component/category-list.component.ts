@@ -4,10 +4,10 @@ import {Category} from "../model/category.model";
 
 @Component({
     selector: "categories",
-    template: '<ul *ngIf="categories"><li *ngFor="let category of categories" (click)="printCategoryName(category)">{{ category.name }}</li></ul>'
+    template: '<ul *ngIf="categories"><li *ngFor="let category of categories" (click)="printCategoryName(category)"><a routerLink="/category/{{category.id}}">{{ category.name }}</a></li></ul>'
 })
 
-export class CategoriesComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
     categories: Category[];
 
     constructor(private _categoriesApiService: CategoriesApiService) {
