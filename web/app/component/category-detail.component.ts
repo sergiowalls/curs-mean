@@ -6,7 +6,13 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: "category",
-    template: '<div>{{ category.name }}</div>'
+    template: `
+        <section *ngIf="category">
+            <div>{{ category.name }}</div>
+            <ul>
+                <li *ngFor="let quote of category.quotes">{{quote.text}}</li>
+            </ul>
+        </section>`
 })
 
 export class CategoryDetailComponent implements OnInit, OnDestroy {
@@ -16,9 +22,8 @@ export class CategoryDetailComponent implements OnInit, OnDestroy {
     constructor(private _route: ActivatedRoute, private _categoriesApiService: CategoriesApiService) {
     }
 
-    async ngOnInit() {
+    ngOnInit() {
         this._routeSubscription = this._route.params.subscribe(async param => {
-            console.log(param.id);
             this.category = await this._categoriesApiService.getCategoryById(param.id)
         });
     }

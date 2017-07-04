@@ -4,7 +4,11 @@ import {Category} from "../model/category.model";
 
 @Component({
     selector: "categories",
-    template: '<ul *ngIf="categories"><li *ngFor="let category of categories" (click)="printCategoryName(category)"><a routerLink="/category/{{category.id}}">{{ category.name }}</a></li></ul>'
+    template: `
+        <ul *ngIf="categories">
+            <li *ngFor="let category of categories" (click)="printCategoryName(category)"><a
+                    routerLink="/category/{{category.id}}">{{ category.name }}</a></li>
+        </ul>`
 })
 
 export class CategoryListComponent implements OnInit {

@@ -4,7 +4,10 @@ import {QuotesApiService} from "../service/quotes-api.service";
 
 @Component({
     selector: "random-quote",
-    template: '<div *ngIf="randomQuote">{{ randomQuote.text }} <button (click) = "onShowRandomQuote()">More</button></div>'
+    template: `
+        <div *ngIf="randomQuote">{{ randomQuote.text }}
+            <button (click)="onShowRandomQuote()">More</button>
+        </div>`
 })
 
 export class RandomQuoteComponent implements OnInit {
