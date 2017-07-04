@@ -13,6 +13,7 @@ import {CategoryDetailComponent} from "./component/category-detail.component";
 import {MoviesApiService} from "./service/movies-api.service";
 import {MovieListComponent} from "./component/movie-list.component";
 import {MovieDetailComponent} from "./component/movie-detail.component";
+import {AddQuoteComponent} from "./component/add-quote.component";
 
 @NgModule({
     imports: [
@@ -23,6 +24,7 @@ import {MovieDetailComponent} from "./component/movie-detail.component";
     declarations: [
         AppComponent,
         RandomQuoteComponent,
+        AddQuoteComponent,
         CategoryListComponent,
         CategoryDetailComponent,
         MovieListComponent,
