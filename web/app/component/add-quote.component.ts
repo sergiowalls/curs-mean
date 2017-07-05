@@ -5,10 +5,21 @@ import {QuotesApiService} from "../service/quotes-api.service";
 @Component({
     selector: 'add-quote',
     template: `
-        <div *ngIf="formIsOpen"><textarea placeholder="Text" [(ngModel)]="quote.text"></textarea>
-            <textarea placeholder="Movie" [(ngModel)]="quote.movie"></textarea>
-            <textarea placeholder="Character" [(ngModel)]="quote.character"></textarea>
-            <textarea placeholder="Year" [(ngModel)]="quote.year"></textarea>
+        <div *ngIf="formIsOpen">
+            <div>
+                <textarea placeholder="Text" [(ngModel)]="quote.text" minlength="3" required name="text"
+                          #name="ngModel"></textarea>
+                <label *ngIf="name.invalid && name.dirty">This field is obligatory</label>
+            </div>
+            <div>
+                <textarea placeholder="Movie" [(ngModel)]="quote.movie"></textarea>
+            </div>
+            <div>
+                <textarea placeholder="Character" [(ngModel)]="quote.character"></textarea>
+            </div>
+            <div>
+                <textarea placeholder="Year" [(ngModel)]="quote.year"></textarea>
+            </div>
             <button (click)="saveQuote()">Save</button>
             <p>{{ status }}</p>
         </div>
@@ -50,3 +61,4 @@ export class AddQuoteComponent implements OnInit {
     }
 
 }
+
