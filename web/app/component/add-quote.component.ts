@@ -1,6 +1,8 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {Quote} from "../model/quote.model";
 import {QuotesApiService} from "../service/quotes-api.service";
+import {Category} from "../model/category.model";
+import {CategoriesApiService} from "../service/categories-api.service";
 
 @Component({
     selector: 'add-quote',
@@ -15,35 +17,48 @@ import {QuotesApiService} from "../service/quotes-api.service";
                 <label *ngIf="movie.invalid && movie.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Character" [(ngModel)]="quote.character" required #character="ngModel"></textarea>
+                <textarea placeholder="Character" [(ngModel)]="quote.character" required
+                          #character="ngModel"></textarea>
                 <label *ngIf="character.invalid && character.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Year" [(ngModel)]="quote.year" minlength="4" maxlength="4" required #year="ngModel"></textarea>
+                <textarea placeholder="Year" [(ngModel)]="quote.year" minlength="4" maxlength="4" required
+                          #year="ngModel"></textarea>
                 <label *ngIf="year.invalid && year.dirty">This field is obligatory</label>
             </div>
+            <div>
+                <select required name="category" [(ngModel)]="quote.category_id" #category="ngModel">
+                    <option *ngFor="let category of categories" value="{{category.id}}">{{ category.name }}</option>
+                </select>
+                <label *ngIf="category.invalid && category.dirty">This field is obligatory</label>
+            </div>
             <button (click)="saveQuote()">Save</button>
-            <p>{{ status }}</p>
         </div>
+        <p>{{ status }}</p>
     `
 })
 
 export class AddQuoteComponent implements OnInit {
 
     quote: Quote;
-    formIsOpen: boolean;
-    status: string;
+    private formIsOpen: boolean;
+    private status: string;
+    categories: Category[];
 
-    constructor(private _quoteApiService: QuotesApiService) {
-        this.formIsOpen = true;
+    @Output() onSubmitted = new EventEmitter<Quote>();
+
+    constructor(private _quoteApiService: QuotesApiService, private _categoryApiService: CategoriesApiService) {
+        this.formIsOpen = false;
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.quote = new Quote();
+        this.categories = await this._categoryApiService.getCategories();
     }
 
     openForm() {
         this.formIsOpen = true;
+        this.status = "";
     }
 
     closeForm() {
@@ -56,6 +71,7 @@ export class AddQuoteComponent implements OnInit {
         try {
             await this._quoteApiService.postQuote(this.quote);
             this.status = "Successfully";
+            this.onSubmitted.emit(this.quote);
         } catch (err) {
             this.status = err.statusText;
             console.log(err);

@@ -1,6 +1,7 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Quote} from "../model/quote.model";
 import {QuotesApiService} from "../service/quotes-api.service";
+import {AddQuoteComponent} from "./add-quote.component";
 
 @Component({
     selector: "random-quote",
@@ -13,7 +14,7 @@ import {QuotesApiService} from "../service/quotes-api.service";
         </div>
         <button (click)="onShowRandomQuote()">More</button>
         <button (click)="addNewQuote()">{{addQuote ? 'Cancel' : 'Add quote'}}</button>
-        <add-quote></add-quote>
+        <add-quote #addQuoteForm (onSubmitted)="onNewQuoteAdded($event)"></add-quote>
     `
 })
 
@@ -22,6 +23,9 @@ export class RandomQuoteComponent implements OnInit {
     quotes: Quote[];
     randomQuote: Quote;
     addQuote: boolean;
+
+    @ViewChild(AddQuoteComponent)
+    addQuoteForm: AddQuoteComponent;
 
     constructor(private _quoteApiService: QuotesApiService) {
         this.addQuote = false;
@@ -37,6 +41,14 @@ export class RandomQuoteComponent implements OnInit {
     }
 
     addNewQuote() {
+        this.addQuote ? this.addQuoteForm.closeForm() : this.addQuoteForm.openForm();
+
         this.addQuote = !this.addQuote;
+    }
+
+    onNewQuoteAdded(quote: Quote) {
+        this.quotes.push(quote);
+        this.addQuote = false;
+        this.addQuoteForm.closeForm();
     }
 }
