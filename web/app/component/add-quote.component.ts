@@ -7,18 +7,20 @@ import {QuotesApiService} from "../service/quotes-api.service";
     template: `
         <div *ngIf="formIsOpen">
             <div>
-                <textarea placeholder="Text" [(ngModel)]="quote.text" minlength="3" required name="text"
-                          #name="ngModel"></textarea>
-                <label *ngIf="name.invalid && name.dirty">This field is obligatory</label>
+                <textarea placeholder="Text" [(ngModel)]="quote.text" minlength="3" required #text="ngModel"></textarea>
+                <label *ngIf="text.invalid && text.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Movie" [(ngModel)]="quote.movie"></textarea>
+                <textarea placeholder="Movie" [(ngModel)]="quote.movie" required #movie="ngModel"></textarea>
+                <label *ngIf="movie.invalid && movie.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Character" [(ngModel)]="quote.character"></textarea>
+                <textarea placeholder="Character" [(ngModel)]="quote.character" required #character="ngModel"></textarea>
+                <label *ngIf="character.invalid && character.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Year" [(ngModel)]="quote.year"></textarea>
+                <textarea placeholder="Year" [(ngModel)]="quote.year" minlength="4" maxlength="4" required #year="ngModel"></textarea>
+                <label *ngIf="year.invalid && year.dirty">This field is obligatory</label>
             </div>
             <button (click)="saveQuote()">Save</button>
             <p>{{ status }}</p>
