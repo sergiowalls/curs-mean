@@ -10,6 +10,7 @@ import {QuotesApiService} from "../service/quotes-api.service";
             <textarea placeholder="Character" [(ngModel)]="quote.character"></textarea>
             <textarea placeholder="Year" [(ngModel)]="quote.year"></textarea>
             <button (click)="saveQuote()">Save</button>
+            <p>{{ status }}</p>
         </div>
     `
 })
@@ -18,6 +19,7 @@ export class AddQuoteComponent implements OnInit {
 
     quote: Quote;
     formIsOpen: boolean;
+    status: string;
 
     constructor(private _quoteApiService: QuotesApiService) {
         this.formIsOpen = true;
@@ -35,12 +37,16 @@ export class AddQuoteComponent implements OnInit {
         this.formIsOpen = false;
     }
 
-    saveQuote() {
-        console.log("Text: " + this.quote.text);
-        console.log("Character: " + this.quote.character);
-        console.log("Movie: " + this.quote.movie);
-        console.log("Year: " + this.quote.year);
-        this._quoteApiService.postQuote(this.quote);
+    async saveQuote() {
+        console.log("Text: " + this.quote.text + "\n" + "Character: " + this.quote.character + "\n"
+            + "Movie: " + this.quote.movie + "\n" + "Year: " + this.quote.year);
+        try {
+            await this._quoteApiService.postQuote(this.quote);
+            this.status = "Successfully";
+        } catch (err) {
+            this.status = err.statusText;
+            console.log(err);
+        }
     }
 
 }
