@@ -15,6 +15,8 @@ import {MovieListComponent} from "./component/movie-list.component";
 import {MovieDetailComponent} from "./component/movie-detail.component";
 import {AddQuoteComponent} from "./component/add-quote.component";
 import {FormsModule} from "@angular/forms";
+import {AuthComponent} from "./component/auth.component";
+import {AuthApiService} from "./service/auth-api.service";
 
 @NgModule({
     imports: [
@@ -30,12 +32,14 @@ import {FormsModule} from "@angular/forms";
         CategoryListComponent,
         CategoryDetailComponent,
         MovieListComponent,
-        MovieDetailComponent
+        MovieDetailComponent,
+        AuthComponent
     ],
     providers: [
         QuotesApiService,
         CategoriesApiService,
         MoviesApiService,
+        AuthApiService,
         HttpService
     ],
     bootstrap: [AppComponent]
