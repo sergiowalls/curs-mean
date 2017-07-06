@@ -1,5 +1,6 @@
 const express = require("express"),
     http = require("http"),
+    cookieParser = require("cookie-parser"),
     bodyParser = require("body-parser");
 
 const router = require("./router"),
@@ -13,6 +14,7 @@ class Server {
     init() {
         this.app = express();
         this.app.use(bodyParser.json());
+        this.app.use(cookieParser());
         this.app.use(express.static("./api/public"));
         this.app.use("/api", router);
         this.app.use((req, res, next) => res.sendFile(__dirname + "/public/index.html"))

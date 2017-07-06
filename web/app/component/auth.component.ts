@@ -4,6 +4,7 @@ import {AuthApiService} from "../service/auth-api.service";
 @Component({
     selector: "auth-form",
     template: `
+        <h1>Login</h1>
         <form>
             <input placeholder="username" name="username" [(ngModel)]="username">
             <input type="password" placeholder="password" name="password" [(ngModel)]="password">

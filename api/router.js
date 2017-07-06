@@ -21,7 +21,7 @@ class Router {
             .delete(authController.authenticate, quotesController.remove);
 
         this.router.route("/quotes")
-            .get(quotesController.getAll)
+            .get(authController.authenticate, quotesController.getAll)
             .post(quotesController.create);
 
         this.router.route("/categories/:id")
