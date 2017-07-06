@@ -6,6 +6,7 @@ import {AddQuoteComponent} from "./add-quote.component";
 @Component({
     selector: "random-quote",
     template: `
+        <h1>Movie Quotes</h1>
         <div *ngIf="randomQuote">
             <blockquote>
                 <p>{{ randomQuote.text }}</p>

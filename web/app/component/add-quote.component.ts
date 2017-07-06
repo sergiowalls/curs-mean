@@ -7,22 +7,22 @@ import {CategoriesApiService} from "../service/categories-api.service";
 @Component({
     selector: 'add-quote',
     template: `
-        <div *ngIf="formIsOpen">
+        <form *ngIf="formIsOpen" #quoteForm="ngForm">
             <div>
-                <textarea placeholder="Text" [(ngModel)]="quote.text" minlength="3" required #text="ngModel"></textarea>
+                <textarea placeholder="Text" name="text" [(ngModel)]="quote.text" minlength="3" required #text="ngModel"></textarea>
                 <label *ngIf="text.invalid && text.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Movie" [(ngModel)]="quote.movie" required #movie="ngModel"></textarea>
+                <textarea placeholder="Movie" name="movie" [(ngModel)]="quote.movie" required #movie="ngModel"></textarea>
                 <label *ngIf="movie.invalid && movie.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Character" [(ngModel)]="quote.character" required
+                <textarea placeholder="Character" name="character" [(ngModel)]="quote.character" required
                           #character="ngModel"></textarea>
                 <label *ngIf="character.invalid && character.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Year" [(ngModel)]="quote.year" minlength="4" maxlength="4" required
+                <textarea placeholder="Year" name="year" [(ngModel)]="quote.year" minlength="4" maxlength="4" required
                           #year="ngModel"></textarea>
                 <label *ngIf="year.invalid && year.dirty">This field is obligatory</label>
             </div>
@@ -32,8 +32,8 @@ import {CategoriesApiService} from "../service/categories-api.service";
                 </select>
                 <label *ngIf="category.invalid && category.dirty">This field is obligatory</label>
             </div>
-            <button (click)="saveQuote()">Save</button>
-        </div>
+            <button [disabled]="quoteForm.form.invalid" (click)="saveQuote()">Save</button>
+        </form>
         <p>{{ status }}</p>
     `
 })
