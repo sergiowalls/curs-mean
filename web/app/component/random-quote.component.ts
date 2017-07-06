@@ -14,6 +14,7 @@ import {AddQuoteComponent} from "./add-quote.component";
             <p>{{randomQuote.character}} | {{randomQuote.movie}}</p>
         </div>
         <button (click)="onShowRandomQuote()">More</button>
+        <button (click)="editQuote()">{{addQuote ? 'Cancel' : 'Edit quote'}}</button>
         <button (click)="addNewQuote()">{{addQuote ? 'Cancel' : 'Add quote'}}</button>
         <add-quote #addQuoteForm (onSubmitted)="onNewQuoteAdded($event)"></add-quote>
     `
@@ -43,7 +44,11 @@ export class RandomQuoteComponent implements OnInit {
 
     addNewQuote() {
         this.addQuote ? this.addQuoteForm.closeForm() : this.addQuoteForm.openForm();
+        this.addQuote = !this.addQuote;
+    }
 
+    editQuote() {
+        this.addQuote ? this.addQuoteForm.closeForm() : this.addQuoteForm.openForm(this.randomQuote);
         this.addQuote = !this.addQuote;
     }
 

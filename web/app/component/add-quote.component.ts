@@ -9,11 +9,13 @@ import {CategoriesApiService} from "../service/categories-api.service";
     template: `
         <form *ngIf="formIsOpen" #quoteForm="ngForm">
             <div>
-                <textarea placeholder="Text" name="text" [(ngModel)]="quote.text" minlength="3" required #text="ngModel"></textarea>
+                <textarea placeholder="Text" name="text" [(ngModel)]="quote.text" minlength="3" required
+                          #text="ngModel"></textarea>
                 <label *ngIf="text.invalid && text.dirty">This field is obligatory</label>
             </div>
             <div>
-                <textarea placeholder="Movie" name="movie" [(ngModel)]="quote.movie" required #movie="ngModel"></textarea>
+                <textarea placeholder="Movie" name="movie" [(ngModel)]="quote.movie" required
+                          #movie="ngModel"></textarea>
                 <label *ngIf="movie.invalid && movie.dirty">This field is obligatory</label>
             </div>
             <div>
@@ -43,6 +45,7 @@ export class AddQuoteComponent implements OnInit {
     quote: Quote;
     private formIsOpen: boolean;
     private status: string;
+    private edit: boolean;
     categories: Category[];
 
     @Output() onSubmitted = new EventEmitter<Quote>();
@@ -56,7 +59,12 @@ export class AddQuoteComponent implements OnInit {
         this.categories = await this._categoryApiService.getCategories();
     }
 
-    openForm() {
+    openForm(quote?: Quote) {
+        if (quote) {
+            this.edit = true;
+            this.quote = quote;
+        }
+        else this.edit = false;
         this.formIsOpen = true;
         this.status = "";
     }
@@ -69,7 +77,7 @@ export class AddQuoteComponent implements OnInit {
         console.log("Text: " + this.quote.text + "\n" + "Character: " + this.quote.character + "\n"
             + "Movie: " + this.quote.movie + "\n" + "Year: " + this.quote.year);
         try {
-            await this._quoteApiService.postQuote(this.quote);
+            this.edit ? await this._quoteApiService.putQuote(this.quote) : await this._quoteApiService.postQuote(this.quote);
             this.status = "Successfully";
             this.onSubmitted.emit(this.quote);
         } catch (err) {

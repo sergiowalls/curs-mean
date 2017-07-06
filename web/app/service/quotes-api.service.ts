@@ -14,4 +14,8 @@ export class QuotesApiService {
     postQuote(quote: Quote): Promise<any> {
         return this._httpService.post("quotes", quote)
     }
+
+    putQuote(quote: Quote): Promise<any> {
+        return this._httpService.put("quotes/" + quote.id, quote)
+    }
 }

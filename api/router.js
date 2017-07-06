@@ -17,7 +17,7 @@ class Router {
 
         this.router.route("/quotes/:id")
             .get(authController.authenticate, quotesController.get)
-            .put(authController.authenticate, quotesController.update)
+            .put(quotesController.update)
             .delete(authController.authenticate, quotesController.remove);
 
         this.router.route("/quotes")
