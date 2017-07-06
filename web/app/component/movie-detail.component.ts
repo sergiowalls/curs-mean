@@ -8,8 +8,17 @@ import {Subscription} from "rxjs/Subscription";
     selector: "movie",
     template: `
         <section *ngIf="movie">
-            <h1>{{movie.title}}</h1>
-            <div>{{movie.genre}}, {{movie.year}}, {{movie.running_time}}</div>
+            <div *ngIf="!isEditing">
+                <h1>{{movie.title}}</h1>
+                {{movie.genre}}, {{movie.year}}, {{movie.running_time}}
+            </div>
+            <form *ngIf="isEditing">
+                <input placeholder="Title" name="title" [(ngModel)]="movie.title">
+                <input placeholder="Genre" name="genre" [(ngModel)]="movie.genre">
+                <input placeholder="Year" name="year" [(ngModel)]="movie.year">
+                <input placeholder="Running time" name="running time" [(ngModel)]="movie.running_time">
+            </form>
+            <button (click)="editMovie()">{{isEditing ? 'Done' : 'Edit'}}</button>
         </section>
     `
 })
@@ -17,6 +26,7 @@ import {Subscription} from "rxjs/Subscription";
 export class MovieDetailComponent implements OnInit, OnDestroy {
     movie: Movie;
     _routeSubscription: Subscription;
+    private isEditing: boolean;
 
     constructor(private _route: ActivatedRoute, private _moviesApiService: MoviesApiService) {
     }
@@ -29,5 +39,10 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this._routeSubscription.unsubscribe();
+    }
+
+    editMovie() {
+        if (this.isEditing) this._moviesApiService.putMovie(this.movie);
+        this.isEditing = !this.isEditing;
     }
 }

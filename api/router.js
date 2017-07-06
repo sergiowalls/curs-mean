@@ -35,7 +35,7 @@ class Router {
 
         this.router.route("/movies/:id")
             .get(moviesController.get)
-            .put(authController.authenticate, moviesController.update)
+            .put(moviesController.update)
             .delete(authController.authenticate, moviesController.remove);
 
         this.router.route("/movies")

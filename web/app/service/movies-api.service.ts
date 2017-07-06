@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpService} from "./http.service";
+import {Movie} from "../model/movie.model";
 
 @Injectable()
 export class MoviesApiService {
@@ -12,5 +13,9 @@ export class MoviesApiService {
 
     getMovieById(id: number): Promise<any> {
         return this._httpService.get("movies/" + id);
+    }
+
+    putMovie(movie: Movie): Promise<any> {
+        return this._httpService.put("movies/" + movie.id, movie)
     }
 }
