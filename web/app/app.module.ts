@@ -17,13 +17,16 @@ import {AddQuoteComponent} from "./component/add-quote.component";
 import {FormsModule} from "@angular/forms";
 import {AuthComponent} from "./component/auth.component";
 import {AuthApiService} from "./service/auth-api.service";
+import {AuthService} from "./service/auth.service";
+import {CookieModule} from "ngx-cookie";
 
 @NgModule({
     imports: [
         RouterModule.forRoot(appRoutes),
         BrowserModule,
         HttpModule,
-        FormsModule
+        FormsModule,
+        CookieModule.forRoot()
     ],
     declarations: [
         AppComponent,
@@ -40,7 +43,8 @@ import {AuthApiService} from "./service/auth-api.service";
         CategoriesApiService,
         MoviesApiService,
         AuthApiService,
-        HttpService
+        HttpService,
+        AuthService
     ],
     bootstrap: [AppComponent]
 })
