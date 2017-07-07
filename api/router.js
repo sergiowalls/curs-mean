@@ -17,29 +17,29 @@ class Router {
 
         this.router.route("/quotes/:id")
             .get(authController.authenticate, quotesController.get)
-            .put(quotesController.update)
+            .put(authController.authenticate, quotesController.update)
             .delete(authController.authenticate, quotesController.remove);
 
         this.router.route("/quotes")
             .get(authController.authenticate, quotesController.getAll)
-            .post(quotesController.create);
+            .post(authController.authenticate, quotesController.create);
 
         this.router.route("/categories/:id")
-            .get(categoriesController.get)
+            .get(authController.authenticate, categoriesController.get)
             .put(authController.authenticate, categoriesController.update)
             .delete(authController.authenticate, categoriesController.remove);
 
         this.router.route("/categories")
-            .get(categoriesController.getAll)
+            .get(authController.authenticate, categoriesController.getAll)
             .post(authController.authenticate, categoriesController.create);
 
         this.router.route("/movies/:id")
-            .get(moviesController.get)
-            .put(moviesController.update)
+            .get(authController.authenticate, moviesController.get)
+            .put(authController.authenticate, moviesController.update)
             .delete(authController.authenticate, moviesController.remove);
 
         this.router.route("/movies")
-            .get(moviesController.getAll)
+            .get(authController.authenticate, moviesController.getAll)
             .post(authController.authenticate, moviesController.create);
     }
 }

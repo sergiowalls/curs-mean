@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from "@angular/core";
 import {Quote} from "../model/quote.model";
 import {QuotesApiService} from "../service/quotes-api.service";
 import {AddQuoteComponent} from "./add-quote.component";
+import {Router} from "@angular/router";
 
 @Component({
     selector: "random-quote",
@@ -29,13 +30,17 @@ export class RandomQuoteComponent implements OnInit {
     @ViewChild(AddQuoteComponent)
     addQuoteForm: AddQuoteComponent;
 
-    constructor(private _quoteApiService: QuotesApiService) {
+    constructor(private _quoteApiService: QuotesApiService, private _router: Router) {
         this.addQuote = false;
     }
 
     async ngOnInit() {
-        this.quotes = await this._quoteApiService.getQuotes();
+        try {
+            this.quotes = await this._quoteApiService.getQuotes();
         this.onShowRandomQuote();
+        } catch (err) {
+            if (err.status === 401) this._router.navigate(["login"])
+        }
     }
 
     onShowRandomQuote() {
